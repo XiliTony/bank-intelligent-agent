@@ -1,0 +1,46 @@
+# web 服务访问端口
+server:
+  port: 8082
+  servlet:
+    context-path: /api
+
+# spring 和数据库配置
+spring:
+  application:
+    name: api
+  datasource:
+    url: jdbc:mysql://localhost:3306/bank_agent?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username:
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  messages:
+    encoding: UTF-8
+
+# langchain4j 配置
+langchain4j:
+  community:
+    dashscope:
+      # 普通对话模型
+      chat-model:
+        model-name: qwen-max
+        api-key:
+      # RAG 模型
+      embedding-model:
+        model-name: text-embedding-v4
+        api-key:
+      # 流式输出模型
+      streaming-chat-model:
+        model-name: qwen-max
+        api-key:
+
+mybatis:
+  # 启用自动映射：将数据库字段的下划线命名（如 json_content）自动转换为 Java 对象的驼峰命名（如 jsonContent）
+  configuration:
+    map-underscore-to-camel-case: true
+  # 指定 MyBatis 实体类（POJO）的包路径，避免在 mapper XML 或注解中写全限定类名
+  # 例如：com.icbc.api.ai.entity.PersistentChat 可简写为 PersistentChat
+  type-aliases-package: com.icbc.api.ai.entity
+
+# 智谱 Web 搜索MCP服务
+bigmodel:
+  api-key:
